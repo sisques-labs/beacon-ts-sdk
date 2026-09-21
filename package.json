@@ -23,8 +23,14 @@
   },
   "scripts": {
     "build": "tsup",
+    "lint": "eslint",
+    "prepare": "husky || true",
     "test": "vitest run",
+    "test:changed": "vitest run --changed --passWithNoTests",
     "typecheck": "tsc --noEmit"
+  },
+  "lint-staged": {
+    "**/*.{ts,tsx}": "eslint --fix"
   },
   "dependencies": {
     "zod": "^4.6.5"
@@ -38,15 +44,21 @@
     "kafkajs": { "optional": true }
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.5",
     "@nestjs/common": "^12.0.3",
     "@nestjs/core": "^12.0.3",
     "@nestjs/testing": "^12.0.3",
     "@types/node": "^22.0.0",
     "@vitest/coverage-v8": "^3.2.0",
+    "eslint": "9.39.5",
+    "globals": "^17.12.0",
+    "husky": "9.1.7",
+    "lint-staged": "17.0.8",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.2",
     "tsup": "^8.5.1",
     "typescript": "^5.9.0",
+    "typescript-eslint": "^8.70.0",
     "vitest": "^3.2.0"
   }
 }
