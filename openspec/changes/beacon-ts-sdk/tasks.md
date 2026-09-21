@@ -59,7 +59,7 @@ Note: chain strategy (stacked-to-main vs feature-branch-chain) must be asked bef
 - [x] 4.3 Extend `create-transport.ts` for kafka/graphql; test REST import never loads kafkajs
 
 ## Phase 5: NestJS + packaging + docs (PR 4)
-- [ ] 5.1 RED+GREEN `src/nestjs/{beacon.module,beacon.tokens,beacon.options}.ts` + `src/nestjs/index.ts` (global, forRootAsync, `BEACON_CONFIG`, shutdown `close()`, invalid config fails bootstrap, errors pass through)
-- [ ] 5.2 Test core import loads no `@nestjs/*`; verify ESM+CJS build and exports map
-- [ ] 5.3 Modify `README.md`: three transports, accepted-not-delivered, Kafka silent-drop, `SUPPORTED_CONTRACT` compatibility table, 0.x note
-- [ ] 5.4 Add opt-in Tier B smoke `test/e2e/*.spec.ts` gated by `BEACON_BASE_URL`/`KAFKA_BROKERS`
+- [x] 5.1 RED+GREEN `src/nestjs/{beacon.module,beacon.tokens,beacon.options}.ts` + `src/nestjs/index.ts` (global, forRootAsync, `BEACON_CONFIG`, shutdown `close()`, invalid config fails bootstrap, errors pass through)
+- [x] 5.2 Test core import loads no `@nestjs/*`; verify ESM+CJS build and exports map
+- [x] 5.3 Modify `README.md`: three transports, accepted-not-delivered, Kafka silent-drop, `SUPPORTED_CONTRACT` compatibility table, 0.x note
+- [x] 5.4 Add opt-in Tier B smoke `test/e2e/*.spec.ts` gated by `BEACON_BASE_URL`/`KAFKA_BROKERS`
