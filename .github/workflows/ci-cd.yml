@@ -1,0 +1,31 @@
+name: CI/CD
+
+# Pull requests: install, typecheck, test, build and `pnpm pack --dry-run`.
+# Push to main: the same checks, then semantic-release publishes stable and
+# `x.y.z-edge.N` versions to npmjs and GitHub Packages.
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+# Required even for PR runs: GitHub validates the caller's permissions
+# statically against the reusable workflow's declaration.
+permissions:
+  contents: write
+  packages: write
+  id-token: write
+
+jobs:
+  package:
+    uses: sisques-labs/workflows/.github/workflows/trunk-npm-publish.yml@main
+    with:
+      node_version: "22"
+      # package.json has no `packageManager` field, so auto-detect would fail.
+      pnpm_version: "11"
+      typecheck_command: typecheck
+      test_command: test
+      build_command: build
+    secrets:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
