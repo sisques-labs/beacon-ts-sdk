@@ -8,7 +8,7 @@ import { HttpSender } from '../http/http-sender';
 
 type GraphqlConfig = Extract<BeaconConfig, { transport: 'graphql' }>;
 
-const MUTATION = `mutation NotificationCreate($input: NotificationCreateInput!) {
+const MUTATION = `mutation NotificationCreate($input: NotificationCreateRequestDto!) {
   ${SUPPORTED_CONTRACT.graphql.mutation}(input: $input) { success message id }
 }`;
 
