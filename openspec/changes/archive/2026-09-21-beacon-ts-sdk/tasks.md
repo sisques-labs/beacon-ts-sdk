@@ -49,17 +49,17 @@ Note: chain strategy (stacked-to-main vs feature-branch-chain) must be asked bef
 - [x] 2.6 Export from `src/index.ts`; Tier A golden fixtures `test/fixtures/`
 
 ## Phase 3: REST (PR 2)
-- [ ] 3.1 RED+GREEN `src/transports/http/http-sender.ts` (timeout, static+hook headers per call, hook override, hook throw -> CONFIG, REST error body/502 non-JSON/network -> BeaconError)
-- [ ] 3.2 RED+GREEN `src/transports/rest/rest.transport.ts` (POST `/api/v1/notifications`, trailing slash, `{id}` result)
-- [ ] 3.3 RED+GREEN `src/transports/create-transport.ts` (rest branch, unknown -> CONFIG); wire into client
+- [x] 3.1 RED+GREEN `src/transports/http/http-sender.ts` (timeout, static+hook headers per call, hook override, hook throw -> CONFIG, REST error body/502 non-JSON/network -> BeaconError)
+- [x] 3.2 RED+GREEN `src/transports/rest/rest.transport.ts` (POST `/api/v1/notifications`, trailing slash, `{id}` result)
+- [x] 3.3 RED+GREEN `src/transports/create-transport.ts` (rest branch, unknown -> CONFIG); wire into client
 
 ## Phase 4: Kafka + GraphQL (PR 3)
-- [ ] 4.1 RED+GREEN `src/transports/kafka/kafka.transport.ts` (lazy `import('kafkajs')`, default/custom topic, headers, broker failure -> TRANSPORT, missing kafkajs -> CONFIG, no `id`)
-- [ ] 4.2 RED+GREEN `src/transports/graphql/graphql.transport.ts` (`notificationCreate` via HttpSender, `extensions.code` -> `reason`)
-- [ ] 4.3 Extend `create-transport.ts` for kafka/graphql; test REST import never loads kafkajs
+- [x] 4.1 RED+GREEN `src/transports/kafka/kafka.transport.ts` (lazy `import('kafkajs')`, default/custom topic, headers, broker failure -> TRANSPORT, missing kafkajs -> CONFIG, no `id`)
+- [x] 4.2 RED+GREEN `src/transports/graphql/graphql.transport.ts` (`notificationCreate` via HttpSender, `extensions.code` -> `reason`)
+- [x] 4.3 Extend `create-transport.ts` for kafka/graphql; test REST import never loads kafkajs
 
 ## Phase 5: NestJS + packaging + docs (PR 4)
-- [ ] 5.1 RED+GREEN `src/nestjs/{beacon.module,beacon.tokens,beacon.options}.ts` + `src/nestjs/index.ts` (global, forRootAsync, `BEACON_CONFIG`, shutdown `close()`, invalid config fails bootstrap, errors pass through)
-- [ ] 5.2 Test core import loads no `@nestjs/*`; verify ESM+CJS build and exports map
-- [ ] 5.3 Modify `README.md`: three transports, accepted-not-delivered, Kafka silent-drop, `SUPPORTED_CONTRACT` compatibility table, 0.x note
-- [ ] 5.4 Add opt-in Tier B smoke `test/e2e/*.spec.ts` gated by `BEACON_BASE_URL`/`KAFKA_BROKERS`
+- [x] 5.1 RED+GREEN `src/nestjs/{beacon.module,beacon.tokens,beacon.options}.ts` + `src/nestjs/index.ts` (global, forRootAsync, `BEACON_CONFIG`, shutdown `close()`, invalid config fails bootstrap, errors pass through)
+- [x] 5.2 Test core import loads no `@nestjs/*`; verify ESM+CJS build and exports map
+- [x] 5.3 Modify `README.md`: three transports, accepted-not-delivered, Kafka silent-drop, `SUPPORTED_CONTRACT` compatibility table, 0.x note
+- [x] 5.4 Add opt-in Tier B smoke `test/e2e/*.spec.ts` gated by `BEACON_BASE_URL`/`KAFKA_BROKERS`
