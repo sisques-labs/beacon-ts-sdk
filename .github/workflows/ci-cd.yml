@@ -27,5 +27,8 @@ jobs:
       typecheck_command: typecheck
       test_command: test
       build_command: build
+      # Also commit CHANGELOG.md and the package.json version back to main.
+      # Needs main to allow github-actions to push (or a RELEASE_TOKEN secret).
+      commit_release_files: true
     secrets:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
