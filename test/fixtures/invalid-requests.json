@@ -1,0 +1,10 @@
+[
+  { "name": "malformed tenantId", "patch": { "tenantId": "not-a-uuid" }, "fields": ["tenantId"] },
+  { "name": "malformed recipientUserId", "patch": { "recipientUserId": "123" }, "fields": ["recipientUserId"] },
+  { "name": "unsupported channel", "patch": { "channel": "EMAIL" }, "fields": ["channel"] },
+  { "name": "title over 200", "patch": { "title": "@repeat:a:201" }, "fields": ["title"] },
+  { "name": "body over 5000", "patch": { "body": "@repeat:a:5001" }, "fields": ["body"] },
+  { "name": "sourceService over 100", "patch": { "sourceService": "@repeat:a:101" }, "fields": ["sourceService"] },
+  { "name": "dedupeKey over 255", "patch": { "dedupeKey": "@repeat:a:256" }, "fields": ["dedupeKey"] },
+  { "name": "webhook is not accepted", "patch": { "webhook": "https://discord.example/hook" }, "fields": ["webhook"] }
+]

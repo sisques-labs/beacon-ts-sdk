@@ -1,3 +1,5 @@
+export { BeaconClient } from './core/beacon-client';
+export type { BeaconConfig, HeadersInitLike } from './core/config/beacon-config.types';
 export { SUPPORTED_CONTRACT } from './core/contract/supported-contract';
 export { BeaconError } from './core/errors/beacon-error';
 export type { BeaconErrorCode, BeaconErrorInit } from './core/errors/beacon-error';
