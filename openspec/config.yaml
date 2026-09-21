@@ -1,0 +1,40 @@
+schema: spec-driven
+
+context: |
+  Project: beacon-ts-sdk (@sisques-labs/beacon-sdk)
+  Purpose: TypeScript SDK for publishing Beacon notification requests over REST, GraphQL or Kafka.
+  Status: implementation under way (chained PRs); package scaffold, Vitest runner and core layer exist.
+  Stack: TypeScript, zod, tsup (ESM+CJS), Vitest; kafkajs and @nestjs/common are optional peers. Node v26.7.0, pnpm 11.17.0 locally.
+  Persistence: hybrid (engram + openspec).
+
+strict_tdd: true  # Vitest runner available (pnpm vitest run)
+
+projects: []  # no project roots discovered (no supported project marker)
+
+testing:
+  runner: vitest
+  command: pnpm vitest run
+  layers:
+    unit: true
+    integration: false
+    e2e: false
+  coverage: true  # v8 via @vitest/coverage-v8
+  linter: none
+  type_checker: tsc (pnpm typecheck)
+  formatter: none
+
+rules:
+  proposal:
+    - Include rollback plan and affected public API surface
+  specs:
+    - Use Given/When/Then scenarios; RFC 2119 keywords
+  design:
+    - Document decisions with rationale; keep Kafka client choice explicit
+  tasks:
+    - Keep tasks small; forecast 400-line review budget
+  apply:
+    - Follow project conventions once established; artifacts in English
+  verify:
+    - Run the configured test/type-check commands once they exist
+  archive:
+    - Merge delta specs into openspec/specs before archiving
