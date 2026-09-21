@@ -54,9 +54,9 @@ Note: chain strategy (stacked-to-main vs feature-branch-chain) must be asked bef
 - [x] 3.3 RED+GREEN `src/transports/create-transport.ts` (rest branch, unknown -> CONFIG); wire into client
 
 ## Phase 4: Kafka + GraphQL (PR 3)
-- [ ] 4.1 RED+GREEN `src/transports/kafka/kafka.transport.ts` (lazy `import('kafkajs')`, default/custom topic, headers, broker failure -> TRANSPORT, missing kafkajs -> CONFIG, no `id`)
-- [ ] 4.2 RED+GREEN `src/transports/graphql/graphql.transport.ts` (`notificationCreate` via HttpSender, `extensions.code` -> `reason`)
-- [ ] 4.3 Extend `create-transport.ts` for kafka/graphql; test REST import never loads kafkajs
+- [x] 4.1 RED+GREEN `src/transports/kafka/kafka.transport.ts` (lazy `import('kafkajs')`, default/custom topic, headers, broker failure -> TRANSPORT, missing kafkajs -> CONFIG, no `id`)
+- [x] 4.2 RED+GREEN `src/transports/graphql/graphql.transport.ts` (`notificationCreate` via HttpSender, `extensions.code` -> `reason`)
+- [x] 4.3 Extend `create-transport.ts` for kafka/graphql; test REST import never loads kafkajs
 
 ## Phase 5: NestJS + packaging + docs (PR 4)
 - [ ] 5.1 RED+GREEN `src/nestjs/{beacon.module,beacon.tokens,beacon.options}.ts` + `src/nestjs/index.ts` (global, forRootAsync, `BEACON_CONFIG`, shutdown `close()`, invalid config fails bootstrap, errors pass through)
