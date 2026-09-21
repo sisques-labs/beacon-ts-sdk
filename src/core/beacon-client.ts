@@ -4,13 +4,19 @@ import type { NotifyResult } from './notification/notify-result.types';
 import { validateNotificationRequest } from './notification/request.schema';
 import type { NotificationRequest } from './notification/request.types';
 import type { Transport } from './ports/transport.port';
+import { createTransport } from '../transports/create-transport';
 
 export class BeaconClient {
   private readonly config: BeaconConfig;
+  private readonly transport: Transport;
 
-  /** Throws a CONFIG `BeaconError` when `config` is invalid. */
-  constructor(config: BeaconConfig, private readonly transport: Transport) {
+  /**
+   * Throws a CONFIG `BeaconError` when `config` is invalid. `transport`
+   * defaults to the adapter selected by `config.transport`.
+   */
+  constructor(config: BeaconConfig, transport?: Transport) {
     this.config = validateBeaconConfig(config);
+    this.transport = transport ?? createTransport(this.config);
   }
 
   /**

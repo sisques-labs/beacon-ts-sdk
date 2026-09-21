@@ -109,3 +109,18 @@ describe('BeaconClient', () => {
     void transport;
   });
 });
+
+describe('BeaconClient default transport', () => {
+  it('builds the transport from config when none is injected', async () => {
+    const fetchImpl = vi.fn(async () => new Response('{"id":"n-9"}', { status: 201 }));
+    const client = new BeaconClient({ ...config, fetch: fetchImpl });
+
+    await expect(client.notify(valid)).resolves.toEqual({
+      accepted: true,
+      transport: 'rest',
+      dedupeKey: 'order-42-shipped',
+      id: 'n-9',
+    });
+    expect(fetchImpl).toHaveBeenCalledTimes(1);
+  });
+});
