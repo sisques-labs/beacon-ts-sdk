@@ -49,9 +49,9 @@ Note: chain strategy (stacked-to-main vs feature-branch-chain) must be asked bef
 - [x] 2.6 Export from `src/index.ts`; Tier A golden fixtures `test/fixtures/`
 
 ## Phase 3: REST (PR 2)
-- [ ] 3.1 RED+GREEN `src/transports/http/http-sender.ts` (timeout, static+hook headers per call, hook override, hook throw -> CONFIG, REST error body/502 non-JSON/network -> BeaconError)
-- [ ] 3.2 RED+GREEN `src/transports/rest/rest.transport.ts` (POST `/api/v1/notifications`, trailing slash, `{id}` result)
-- [ ] 3.3 RED+GREEN `src/transports/create-transport.ts` (rest branch, unknown -> CONFIG); wire into client
+- [x] 3.1 RED+GREEN `src/transports/http/http-sender.ts` (timeout, static+hook headers per call, hook override, hook throw -> CONFIG, REST error body/502 non-JSON/network -> BeaconError)
+- [x] 3.2 RED+GREEN `src/transports/rest/rest.transport.ts` (POST `/api/v1/notifications`, trailing slash, `{id}` result)
+- [x] 3.3 RED+GREEN `src/transports/create-transport.ts` (rest branch, unknown -> CONFIG); wire into client
 
 ## Phase 4: Kafka + GraphQL (PR 3)
 - [ ] 4.1 RED+GREEN `src/transports/kafka/kafka.transport.ts` (lazy `import('kafkajs')`, default/custom topic, headers, broker failure -> TRANSPORT, missing kafkajs -> CONFIG, no `id`)
