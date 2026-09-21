@@ -3,6 +3,14 @@
   "version": "0.0.0",
   "description": "TypeScript SDK for publishing notification requests to Beacon over REST, GraphQL or Kafka.",
   "license": "MIT",
+  "author": "Sisques Labs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sisques-labs/beacon-ts-sdk.git"
+  },
+  "homepage": "https://github.com/sisques-labs/beacon-ts-sdk#readme",
+  "bugs": { "url": "https://github.com/sisques-labs/beacon-ts-sdk/issues" },
+  "publishConfig": { "access": "public" },
   "type": "module",
   "engines": { "node": ">=20.11" },
   "sideEffects": false,
