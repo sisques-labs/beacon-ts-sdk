@@ -1,0 +1,9 @@
+{
+  "tenantId": "3f2b8c1e-5a4d-4e6f-9b7a-1c2d3e4f5a6b",
+  "recipientUserId": "9a8b7c6d-5e4f-4a3b-8c2d-1e0f9a8b7c6d",
+  "channel": "DISCORD",
+  "title": "Order shipped",
+  "body": "Your order 42 has shipped",
+  "sourceService": "orders",
+  "dedupeKey": "order-42-shipped"
+}
