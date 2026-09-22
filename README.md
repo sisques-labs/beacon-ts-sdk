@@ -40,6 +40,8 @@ await beacon.close();
 
 The request never carries a destination address: Beacon resolves the Discord destination from its own server-side config.
 
+Pass an optional `deliveryMode: 'RECORD_ONLY'` to have Beacon record the notification without delivering it to Discord. Omitting the field keeps the pre-existing behavior (`DELIVER`, Beacon's default). The SDK forwards this value unchanged on every transport and never interprets it locally.
+
 ### Transports
 
 ```ts
@@ -99,6 +101,7 @@ Beacon publishes no versioned ingest contract, so the SDK states the shape it ta
 | `graphql.mutation` | `notificationCreate` |
 | `kafka.defaultTopic` | `beacon-api.notification-requests` |
 | `channels` | `DISCORD` |
+| `deliveryModes` | `DELIVER`, `RECORD_ONLY` |
 | `limits.title` | 200 |
 | `limits.body` | 5000 |
 | `limits.sourceService` | 100 |

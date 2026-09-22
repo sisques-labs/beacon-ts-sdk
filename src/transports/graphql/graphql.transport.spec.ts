@@ -76,4 +76,25 @@ describe('GraphqlTransport', () => {
     const transport = new GraphqlTransport({ transport: 'graphql', endpoint: 'https://b.test/graphql', fetch: fetchMock });
     expect(await failure(transport.send(request))).toMatchObject({ code: 'TRANSPORT', transport: 'graphql' });
   });
+
+  it('includes deliveryMode in variables.input when supplied', async () => {
+    const fetchMock = vi.fn(async () => json({ data: { notificationCreate: { success: true, id: 'n-1' } } }));
+    const transport = new GraphqlTransport({ transport: 'graphql', endpoint: 'https://b.test/graphql', fetch: fetchMock });
+    const withMode: NotificationRequest = { ...request, deliveryMode: 'RECORD_ONLY' };
+
+    await transport.send(withMode);
+
+    const [, init] = fetchMock.mock.calls[0] as unknown as [string, RequestInit];
+    expect(JSON.parse(init.body as string).variables.input.deliveryMode).toBe('RECORD_ONLY');
+  });
+
+  it('omits deliveryMode from variables.input when not supplied', async () => {
+    const fetchMock = vi.fn(async () => json({ data: { notificationCreate: { success: true, id: 'n-1' } } }));
+    const transport = new GraphqlTransport({ transport: 'graphql', endpoint: 'https://b.test/graphql', fetch: fetchMock });
+
+    await transport.send(request);
+
+    const [, init] = fetchMock.mock.calls[0] as unknown as [string, RequestInit];
+    expect('deliveryMode' in JSON.parse(init.body as string).variables.input).toBe(false);
+  });
 });
