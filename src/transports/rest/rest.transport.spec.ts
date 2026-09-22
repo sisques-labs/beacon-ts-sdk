@@ -44,4 +44,25 @@ describe('RestTransport', () => {
     const transport = new RestTransport({ transport: 'rest', baseUrl: 'https://b.test' });
     await expect(transport.close()).resolves.toBeUndefined();
   });
+
+  it('includes deliveryMode in the POST body JSON when supplied', async () => {
+    const fetchImpl = vi.fn(async () => created());
+    const transport = new RestTransport({ transport: 'rest', baseUrl: 'https://beacon.example', fetch: fetchImpl });
+    const withMode: NotificationRequest = { ...request, deliveryMode: 'RECORD_ONLY' };
+
+    await transport.send(withMode);
+
+    const [, init] = fetchImpl.mock.calls[0] as unknown as [string, RequestInit];
+    expect(JSON.parse(init.body as string).deliveryMode).toBe('RECORD_ONLY');
+  });
+
+  it('omits deliveryMode from the POST body JSON when not supplied', async () => {
+    const fetchImpl = vi.fn(async () => created());
+    const transport = new RestTransport({ transport: 'rest', baseUrl: 'https://beacon.example', fetch: fetchImpl });
+
+    await transport.send(request);
+
+    const [, init] = fetchImpl.mock.calls[0] as unknown as [string, RequestInit];
+    expect('deliveryMode' in JSON.parse(init.body as string)).toBe(false);
+  });
 });

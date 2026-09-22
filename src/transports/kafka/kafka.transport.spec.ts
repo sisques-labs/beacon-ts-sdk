@@ -118,4 +118,29 @@ describe('KafkaTransport', () => {
     expect(error).toMatchObject({ code: 'CONFIG', transport: 'kafka' });
     expect(error.message).toContain('kafkajs');
   });
+
+  it('includes deliveryMode in the published message value when supplied', async () => {
+    const { producer, mod } = fakeKafka();
+    const transport = new KafkaTransport({ transport: 'kafka', brokers: ['b:9092'] }, async () => mod);
+    const withMode: NotificationRequest = { ...request, deliveryMode: 'RECORD_ONLY' };
+
+    await transport.send(withMode);
+
+    expect(producer.send).toHaveBeenCalledWith({
+      topic: 'beacon-api.notification-requests',
+      messages: [{ key: 'k-1', value: JSON.stringify(withMode), headers: {} }],
+    });
+  });
+
+  it('omits deliveryMode from the published message value when not supplied', async () => {
+    const { producer, mod } = fakeKafka();
+    const transport = new KafkaTransport({ transport: 'kafka', brokers: ['b:9092'] }, async () => mod);
+
+    await transport.send(request);
+
+    expect(producer.send).toHaveBeenCalledWith({
+      topic: 'beacon-api.notification-requests',
+      messages: [{ key: 'k-1', value: JSON.stringify(request), headers: {} }],
+    });
+  });
 });

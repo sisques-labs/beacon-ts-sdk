@@ -12,4 +12,8 @@ describe('package entry point', () => {
     expect('getNotification' in BeaconClient.prototype).toBe(false);
     expect('waitForDelivery' in BeaconClient.prototype).toBe(false);
   });
+
+  it('advertises the supported delivery modes', () => {
+    expect(SUPPORTED_CONTRACT.deliveryModes).toEqual(['DELIVER', 'RECORD_ONLY']);
+  });
 });

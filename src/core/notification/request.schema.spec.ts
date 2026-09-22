@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
+import { SUPPORTED_CONTRACT } from '../contract/supported-contract';
 import { BeaconError } from '../errors/beacon-error';
-import { validateNotificationRequest } from './request.schema';
+import { notificationRequestSchema, validateNotificationRequest } from './request.schema';
 
 const valid = {
   tenantId: '3f2b8c1e-5a4d-4e6f-9b7a-1c2d3e4f5a6b',
@@ -74,5 +75,27 @@ describe('validateNotificationRequest', () => {
   it('rejects non-object input', () => {
     expect(failure(null).code).toBe('VALIDATION');
     expect(failure('nope').code).toBe('VALIDATION');
+  });
+
+  it('accepts deliveryMode: DELIVER', () => {
+    expect(notificationRequestSchema.safeParse({ ...valid, deliveryMode: 'DELIVER' }).success).toBe(true);
+  });
+
+  it('accepts deliveryMode: RECORD_ONLY', () => {
+    expect(notificationRequestSchema.safeParse({ ...valid, deliveryMode: 'RECORD_ONLY' }).success).toBe(true);
+  });
+
+  it('rejects an unknown deliveryMode naming the field', () => {
+    expect(failure({ ...valid, deliveryMode: 'SOMETHING_ELSE' }).fields).toEqual(['deliveryMode']);
+  });
+
+  it('omits deliveryMode from the parsed result when not supplied', () => {
+    const result = validateNotificationRequest(valid);
+    expect('deliveryMode' in result).toBe(false);
+  });
+
+  it('pins schema deliveryMode tokens against SUPPORTED_CONTRACT.deliveryModes', () => {
+    const deliveryModeShape = notificationRequestSchema.shape.deliveryMode.unwrap();
+    expect(deliveryModeShape.options).toEqual(SUPPORTED_CONTRACT.deliveryModes);
   });
 });
