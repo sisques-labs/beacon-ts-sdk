@@ -20,6 +20,7 @@ export const notificationRequestSchema = z.strictObject({
   body: text(limits.body),
   sourceService: text(limits.sourceService),
   dedupeKey: text(limits.dedupeKey),
+  deliveryMode: z.enum(['DELIVER', 'RECORD_ONLY']).optional(),
 }) satisfies z.ZodType<NotificationRequest>;
 
 /** Validates untrusted input; throws a VALIDATION `BeaconError` naming the offending fields. */

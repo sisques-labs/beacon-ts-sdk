@@ -7,6 +7,7 @@ export const SUPPORTED_CONTRACT = {
   graphql: { mutation: 'notificationCreate' },
   kafka: { defaultTopic: 'beacon-api.notification-requests' },
   channels: ['DISCORD'],
+  deliveryModes: ['DELIVER', 'RECORD_ONLY'],
   limits: {
     title: 200,
     body: 5000,
